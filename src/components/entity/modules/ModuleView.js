@@ -1,5 +1,8 @@
 import {Pressable, StyleSheet,Text, View } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image';
+import { Button, ButtonTray } from '../../../UI/Button';
+import icons from '../../../UI/icons';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
   // Initialization
   // state
   // handlers
@@ -15,7 +18,14 @@ return(
       <Text style={styles.text}> Level {module.ModuleLevel}</Text>
       <Text style={styles.text}> {module.ModuleLeaderName} <Text style ={styles.dimText}>(Module Leader)</Text>
       </Text>
+    
    </View>
+     <ButtonTray>
+      <Button icon ={<icons.Edit/>}label='Modify'/>
+      <Button icon ={<icons.Delete/>} label='Delete' styleButton={{backgroundColor:'mistyrose'}}
+  styleLabel={{ color:'red'}}
+/>
+      </ButtonTray>
    </View>
 
         
