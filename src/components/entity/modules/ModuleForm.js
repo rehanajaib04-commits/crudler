@@ -13,7 +13,7 @@ const defaultModule = {
   ModuleImage: null, 
 };
 
-const ModuleForm = ({ onCancel, onSubmit }) => { 
+const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => { 
   // Initializations ---------------------
   defaultModule.ModuleID = Math.floor(100000 + Math.random() * 9000000);
   defaultModule.ModuleImage = 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg';
@@ -33,15 +33,15 @@ const ModuleForm = ({ onCancel, onSubmit }) => {
   ]
 
   // State -------------------------------
-  const [module, setModule] = useState(defaultModule);
+  const [module, setModule] = useState(orginialModule || defaultModule);
 
   // Handlers ----------------------------
   const handleChange = (field, value) => setModule({ ...module, [field]: value });
   const handleSubmit = () => onSubmit(module); 
 
   // View --------------------------------
-  const submitLabel = "Add";
-  const submitIcon = <icons.Add />;
+  const submitLabel = orginialModule ? "Modify" : "Add";
+  const submitIcon = orginialModule ? <icons.Edit/>:<icons.Add />;
 
   return (
     <Form

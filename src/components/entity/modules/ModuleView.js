@@ -7,7 +7,7 @@ import icons from '../../../UI/icons';
   // state
   // handlers
    // view
-const ModuleView = ({ module, onDelete }) => {
+const ModuleView = ({ module, onDelete,onModify }) => {
 
   const handleDelete = () => onDelete(module);
 
@@ -33,7 +33,7 @@ const ModuleView = ({ module, onDelete }) => {
       </View>
 
       <ButtonTray>
-        <Button icon={<icons.Edit />} label='Modify' />
+        <Button icon={<icons.Edit />} label='Modify' onClick={onModify}/>
         <Button
           icon={<icons.Delete />}
           label='Delete'
