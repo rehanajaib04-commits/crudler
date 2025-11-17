@@ -10,7 +10,7 @@ const defaultModule = {
   ModuleLevel: null, // 4,
   ModuleLeaderID: null, // 1,
   ModuleLeaderName: null, // 'Graeme Jones',
-  ModuleImage: null, 
+  ModuleImageURL: null, 
 };
 
 const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => { 
@@ -78,8 +78,8 @@ const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => {
       />
       <Form.InputText
         label="ModuleImage"
-        value={module.ModuleImage}
-        onChangeText={(value) => handleChange('ModuleImage', value)}
+        value={module.ModuleImageURL}
+        onChangeText={(value) => handleChange('ModuleImageURL', value)}
         style={styles.itemTextInput}
       />
     </Form>
