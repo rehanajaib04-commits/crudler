@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import icons from '../../../UI/icons.js';
 import Form from '../../../UI/Form.js';
+import useLoad from '../../API/useLoad.js';
+
 
 const defaultModule = {
   ModuleID: null, // 106778,
   ModuleName: null, // 'Games Programming',
   ModuleCode: null, // 'CI2270',
   ModuleLevel: null, // 4,
-  ModuleLeaderID: null, // 1,
+  ModuleLeaderID: null,
+   ModuleYearID: null, // 1,
   ModuleLeaderName: null, // 'Graeme Jones',
   ModuleImageURL: null, 
 };
@@ -17,6 +20,7 @@ const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => {
   // Initializations ---------------------
   defaultModule.ModuleID = Math.floor(100000 + Math.random() * 9000000);
   defaultModule.ModuleImage = 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg';
+  const yearsEndpoint = 'https://softwarehub.uk/unibase/api/years';
 
   const levels = [
     {value: 3, label : '3 (foundaiton)' },
@@ -34,6 +38,8 @@ const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => {
 
   // State -------------------------------
   const [module, setModule] = useState(orginialModule || defaultModule);
+  const [years, isYearLoading] = useLoad(yearsEndpoint);
+  const [leader, isLeaderLoading] = useLoad(staffEndpoint);
 
   // Handlers ----------------------------
   const handleChange = (field, value) => setModule({ ...module, [field]: value });
@@ -75,6 +81,24 @@ const ModuleForm = ({  orginialModule, onCancel, onSubmit }) => {
         value={module.ModuleLevel}
         onChangeText={(value) => handleChange('ModuleLevel', value)}
         style={styles.itemTextInput}
+      />
+      <Form.InputSelect
+        label="ModuleYearID"
+        prompt= "ModuleYearID"
+        options={cohorts}
+        value={module.ModuleLevel}
+        onChangeText={(value) => handleChange('ModuleYearID', value)}
+        style={styles.itemTextInput}
+        isLoading = {isYearLoading}
+      />
+      <Form.InputSelect
+        label="ModuleLeader"
+        prompt= "Select module leader ..."
+        options={staff}
+        value={module.ModuleLeaderID}
+        onChangeText={(value) => handleChange('ModuleLeaderID', value)}
+        style={styles.itemTextInput}
+        isLoading = {isModuleLeaderLoading}
       />
       <Form.InputText
         label="ModuleImage"
